@@ -1,0 +1,9 @@
+mat-card-content {
+    color: #00695C;
+  }
+
+
+mat-card :hover{
+  transform: scale(1.03);
+  cursor: pointer;
+}  
