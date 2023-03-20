@@ -1,50 +1,64 @@
-<div class="container">
+<h2 style="font-weight: 700;" class="m-3" color="primary">Doctor Information</h2>
+<mat-card class="m-3">
+  <mat-card-title>
+    {{doctorObj?.name}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    {{doctorObj?.qualification}}
+  </mat-card-subtitle>
+  <mat-divider></mat-divider>
 
-    <div class="row">
-      <div class="col-sm-6 col-md-4 mt-3">
-        <mat-card class="add-doc text-center" (click) = "addPatient()">
-          <mat-card-content>
-            Add Patient <br>
-            <mat-icon>group_add</mat-icon>
-          </mat-card-content>
-        </mat-card>
+    <div class="row pt-3">
+      <div class="col-md-6">
+        <mat-card-content>
+          <span> Email : </span> {{doctorObj.email}} <br>
+        <span> Mobile : </span> {{doctorObj.mobile}} <br>
+
+        </mat-card-content>
+      </div>
+      <div class="col-md-6">
+       <mat-card-content>
+        <span> Gender : </span> {{doctorObj.gender}} <br>
+        <span> Department : </span> {{doctorObj.department}}
+       </mat-card-content>
       </div>
     </div>
-  
+</mat-card>
+
+<div class="m-3">
       <!-- Patient table -->
       <h2 style="font-weight: 700;" class="mt-4" color="primary">Patient Information</h2>
       <mat-form-field appearance="fill">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search Here" #input>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Find!!" #input>
       </mat-form-field>
-  
+
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
-  
+
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let row"> {{row.patient_name}} </td>
+            <td mat-cell *matCellDef="let row"> {{row?.patient_name}} </td>
           </ng-container>
-  
+
           <!-- Mobile Column -->
           <ng-container matColumnDef="mobile">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
-            <td mat-cell *matCellDef="let row"> {{row.mobile}} </td>
+            <td mat-cell *matCellDef="let row"> {{row?.mobile}} </td>
           </ng-container>
-  
-          <!-- Department Column -->
-          <ng-container matColumnDef="doctor">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor </th>
-            <td mat-cell *matCellDef="let row"> {{getDoctorName(row.doctor_id)}} </td>
-          </ng-container>
-  
+
            <!-- Gender Column -->
            <ng-container matColumnDef="gender">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-            <td mat-cell *matCellDef="let row"> {{row.gender}} </td>
+            <td mat-cell *matCellDef="let row"> {{row?.gender}} </td>
           </ng-container>
-  
+
+          <ng-container matColumnDef="prescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+            <td mat-cell *matCellDef="let row"> {{row?.prescription}} </td>
+          </ng-container>
+
           <!-- Action Column -->
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
@@ -61,24 +75,19 @@
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
                 </button>
-                <button mat-menu-item (click)="deletePatient(row)">
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
               </mat-menu>
             </td>
           </ng-container>
-  
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
+
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data matching the filter {{input.value}}</td>
           </tr>
         </table>
-  
+
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
       </div>
-  
-  </div>
+</div>
